@@ -1,6 +1,7 @@
 import os
 from discord.ext import commands
 from dotenv import load_dotenv
+import discord
 
 load_dotenv()
 
@@ -9,7 +10,7 @@ token = os.environ.get('TOKEN')
 prefix = os.environ.get('PREFIX')
 
 # initialising the bot
-client = commands.Bot(command_prefix=prefix,help_command=None)
+client = commands.Bot(command_prefix=prefix,help_command=None,activity = discord.Activity(type=discord.ActivityType.listening , name='\'help'))
 
 # list of all cogs
 cogs=['cogs.random','cogs.setup','cogs.help','cogs.periodic']
