@@ -33,6 +33,8 @@ def get_server_list():
             return server_channel
         except:
             print('File is empty')
+            s = {}
+            return s
 
 class Periodic(commands.Cog):
     def __init__(self,bot):
@@ -49,14 +51,15 @@ class Periodic(commands.Cog):
         embed.set_image(url=url)
         # getting the list of all servers and channels to send the message
         server_channel = get_server_list()
-        for guild_id,channel_id in server_channel.items():
-            # sending message to each channel
-            try:
-                channel = await self.bot.fetch_channel(channel_id)
-                await channel.send(embed=embed)
-            except:
-                print('Couldnt send message to this channel')
-                continue
+        if server_channel is not None:
+            for guild_id,channel_id in server_channel.items():
+                # sending message to each channel
+                try:
+                    channel = await self.bot.fetch_channel(channel_id)
+                    await channel.send(embed=embed)
+                except:
+                    print('Couldnt send message to this channel')
+                    continue
 
 def setup(client):
     client.add_cog(Periodic(client))

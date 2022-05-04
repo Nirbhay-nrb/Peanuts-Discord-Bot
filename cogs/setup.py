@@ -13,6 +13,8 @@ def get_server_list():
             return server_channel
         except:
             print('File is empty')
+            s = {}
+            return s
 
 def add_to_file(server_channel):
     with open(file,'w') as f:
@@ -58,16 +60,16 @@ class Setup(commands.Cog):
             return
         
         # proceeding further according the response
-        try:
-            if int(msg.content) > len(list_of_channels) or int(msg.content) <= 0:
-                await ctx.send('Invalid response! Please try again')
-            else:
-                channel_id = list_of_channels[int(msg.content)-1].id
-                add_server(guild_id,channel_id)
-                c = list_of_channels[int(msg.content)-1]
-                await c.send('Get ready for daily comics!')
-        except:
-            await ctx.send('Invalid response! Please try again')
+        # try:
+        if int(msg.content) > len(list_of_channels) or int(msg.content) <= 0:
+            await ctx.send('Invalid response hell! Please try again')
+        else:
+            channel_id = list_of_channels[int(msg.content)-1].id
+            add_server(guild_id,channel_id)
+            c = list_of_channels[int(msg.content)-1]
+            await c.send('Get ready for daily comics!')
+        # except:
+        #     await ctx.send('Invalid response! Please try again')
 
 
 def setup(client):
